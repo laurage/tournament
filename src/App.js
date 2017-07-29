@@ -5,17 +5,18 @@ import './App.css';
 class App extends Component {
   constructor() {
     super();
-    this.state = {playersNumber: 3}
+    this.state = {playersNumber: 1}
+    this.increasePlayersNumber = this.increasePlayersNumber.bind(this)
   }
 
-  // changePlayersNumber() {
-  //
-  // }
+  increasePlayersNumber() {
+    this.setState( {playersNumber: this.state.playersNumber+1 } )
+  }
 
   render() {
     const playerFields = [];
     for (var i = 0; i < this.state.playersNumber; i++) {
-      playerFields.push(< Players />);
+      playerFields.push(<li>< Players addPlayerField={this.increasePlayersNumber}/></li>);
     };
 
     return (
@@ -27,47 +28,36 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <div>{playerFields}</div>
+        <ul>{playerFields}</ul>
       </div>
     );
   }
 }
 
-class Players extends Component {
-
-  addPlayerField() {
-
-  }
-
-  render() {
-    return (
-      <div>
-        < NameForm />
-        < AddPlayerFieldBtn />
-      </div>
-    )
-  }
+function Players({addPlayerField}) {
+  return (
+    <div>
+      < NameForm />
+      < AddPlayerFieldBtn addPlayerField={addPlayerField} />
+    </div>
+  )
 }
 
 
-class NameForm extends Component {
-  render() {
-    return (
-      <div>
-        <form>
-          <input></input>
-        </form>
-      </div>
-    )
-  }
+
+function NameForm(){
+  return (
+    <div>
+      <form>
+        <input></input>
+      </form>
+    </div>
+  )
 }
 
-class AddPlayerFieldBtn extends Component {
-  render() {
-    return (
-      <button onClick={this.changePlayersNumber}>Add a player</button>
-    )
-  }
+function AddPlayerFieldBtn({addPlayerField}) {
+  return <button onClick={addPlayerField.bind(this)}>Add a player</button>
 }
+
 
 export default App;
