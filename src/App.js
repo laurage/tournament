@@ -1,49 +1,66 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+const initialNumberOfPlayers = 0;
 
 class App extends Component {
+
   constructor() {
     super();
-    this.state = {playersNumber: 1}
+    this.state = {
+      playersNumber: initialNumberOfPlayers,
+      playerFields: [<li className="player-field-item" key={ initialNumberOfPlayers }>< PlayerField index={ initialNumberOfPlayers } removePlayerField={this.removePlayerField}/></li>]
+    }
     this.increasePlayersNumber = this.increasePlayersNumber.bind(this)
+    this.removePlayerField = this.removePlayerField.bind(this)
   }
 
   increasePlayersNumber() {
-    this.setState( {playersNumber: this.state.playersNumber+1 } )
+    // Why are we ONLY pushing in the array for it to work?
+    // I thought I needed to setState of playerFields: this.state.playerFields to update playerfields.
+    // Should I use a non mutating way of doing this?
+    this.state.playerFields.push(<li className="player-field-item" key={ this.state.playersNumber+1 }>< PlayerField index={ this.state.playersNumber+1 } removePlayerField={this.removePlayerField}/></li>);
+    this.setState( {
+      playersNumber: this.state.playersNumber+1
+    } )
+  }
+
+  removePlayerField(index) {
+    let shortenPlayerFields = this.state.playerFields.filter(playerField => Number(playerField.key) !== index );
+    this.setState( {
+      playersNumber: this.state.playersNumber-1,
+      playerFields: shortenPlayerFields
+    } )
   }
 
   render() {
-    const playerFields = [];
-    for (var i = 0; i < this.state.playersNumber; i++) {
-      playerFields.push(<li>< Players addPlayerField={this.increasePlayersNumber}/></li>);
-    };
-
+    // console.log(this.state.playerFields);
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Tournament</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <ul>{playerFields}</ul>
+        <ul>{this.state.playerFields}</ul>
+        < AddPlayerFieldBtn addPlayerField={this.increasePlayersNumber} />
+        < CreateTournament />
       </div>
     );
   }
 }
 
-function Players({addPlayerField}) {
+// This is iterating by itself through the playerFields array:
+// <ul>{this.state.playerFields}</ul>
+
+function PlayerField({index, removePlayerField}) {
   return (
     <div>
       < NameForm />
-      < AddPlayerFieldBtn addPlayerField={addPlayerField} />
+      < RemovePlayerFieldBtn index= { index } removePlayerField={removePlayerField} />
+
     </div>
   )
 }
-
-
 
 function NameForm(){
   return (
@@ -56,7 +73,16 @@ function NameForm(){
 }
 
 function AddPlayerFieldBtn({addPlayerField}) {
-  return <button onClick={addPlayerField.bind(this)}>Add a player</button>
+  return <button className="btn btn-sunshine" onClick={addPlayerField.bind(this)}>Add a Player</button>
+  //<i className="fa fa-plus-circle" aria-hidden="true"></i>
+}
+
+function RemovePlayerFieldBtn({removePlayerField, index}) {
+  return <button className="btn btn-sunshine" onClick={removePlayerField.bind(this, index)}>Remove a player</button>
+}
+
+function CreateTournament() {
+  return <button className="btn btn-ocean">Create</button>
 }
 
 
