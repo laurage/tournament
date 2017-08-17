@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-const initialNumberOfPlayers = 0;
+const initialNumberOfPlayers = 1;
 
 class App extends Component {
 
@@ -23,9 +23,12 @@ class App extends Component {
     this.setState( {
       playersNumber: this.state.playersNumber+1
     } )
+    console.log('state: ', this.state);
   }
 
   removePlayerField(index) {
+    console.log('index: ', index);
+    console.log('this: ', this);
     let shortenPlayerFields = this.state.playerFields.filter(playerField => Number(playerField.key) !== index );
     this.setState( {
       playersNumber: this.state.playersNumber-1,
