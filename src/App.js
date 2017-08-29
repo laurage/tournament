@@ -9,7 +9,7 @@ class App extends Component {
     super();
     this.state = {
       playersNumber: initialNumberOfPlayers,
-      playerFields: [<li className="player-field-item" key={ initialNumberOfPlayers }>< PlayerField index={ initialNumberOfPlayers } removePlayerField={this.removePlayerField}/></li>]
+      playerFields: []
     }
     this.increasePlayersNumber = this.increasePlayersNumber.bind(this)
     this.removePlayerField = this.removePlayerField.bind(this)
@@ -23,7 +23,7 @@ class App extends Component {
     this.setState( {
       playersNumber: this.state.playersNumber+1
     } )
-    console.log('state: ', this.state);
+    console.log('playersNumber: ', this.state.playersNumber+1);
   }
 
   removePlayerField(index) {
@@ -35,8 +35,17 @@ class App extends Component {
       playerFields: shortenPlayerFields
     } )
   }
+  componentWillMount() {
+    this.state.playerFields.push(<li
+      className="player-field-item"
+      key={ initialNumberOfPlayers }>
+        < PlayerField index={ initialNumberOfPlayers } removePlayerField={this.removePlayerField}/>
+    </li>);
+  }
 
   render() {
+    console.log('initialNumberOfPlayers: ', initialNumberOfPlayers);
+
     // console.log(this.state.playerFields);
     return (
       <div className="App">
@@ -60,7 +69,6 @@ function PlayerField({index, removePlayerField}) {
     <div>
       < NameForm />
       < RemovePlayerFieldBtn index= { index } removePlayerField={removePlayerField} />
-
     </div>
   )
 }
