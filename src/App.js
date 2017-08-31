@@ -34,7 +34,6 @@ class App extends Component {
     this.setState( {
       players: this.state.players,
       counter: this.state.counter + 1,
-      input: "",
     })
   }
 
@@ -96,7 +95,7 @@ function InputPlayer({ handleChange, handleSubmit, input }){
   // Used onBlur to only trigger a new state when clicking on the button,
   // but if I also want to erase the value in input on that click, I need to give a value to input
   // And that means I need to constantly give a value, which means I need to use onChange and not onBlur. Work around?
-  
+
   return (
     <div>
       <form>
