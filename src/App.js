@@ -41,6 +41,7 @@ class App extends Component {
     this.setState({
       input: e.target.value,
     })
+    console.log(this.state);
   }
 
   shufflePlayers() {
@@ -74,7 +75,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Tournament</h2>
         </div>
-        < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } />
+        < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.state.input } />
         <ul>{players}</ul>
         < CreateTournament shufflePlayers={ this.shufflePlayers }/>
       </div>
@@ -82,20 +83,24 @@ class App extends Component {
   }
 }
 
-function PlayerForm({ addPlayer, handleChange, handleSubmit }) {
+function PlayerForm({ addPlayer, handleChange, handleSubmit, input }) {
   return (
     <div>
-      < InputPlayer handleChange={ handleChange } handleSubmit={ handleSubmit } />
+      < InputPlayer handleChange={ handleChange } handleSubmit={ handleSubmit } input={ input } />
     </div>
   )
 }
 
-function InputPlayer({ handleChange, handleSubmit }){
+function InputPlayer({ handleChange, handleSubmit, input }){
+  // Used onBlur to only trigger a new state when clicking on the button,
+  // but if I also want to erase the value in input on that click, I need to give a value to input
+  // And that means I need to constantly give a value, which means I need to use onChange and not onBlur. Work around?
+
   return (
     <div>
       <form>
-        <input onBlur={handleChange}></input>
-        <button onClick={handleSubmit} className="btn btn-sunshine" type="submit">Add this Player</button>
+        <input onChange={ handleChange } value={ input }></input>
+        <button onClick={ handleSubmit } className="btn btn-sunshine" type="submit">Add this Player</button>
       </form>
     </div>
   )
