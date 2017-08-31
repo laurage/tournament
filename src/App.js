@@ -28,7 +28,7 @@ class App extends Component {
   handleSubmit(e) {
     this.state.players.push({
       key: this.state.counter,
-      name: this.state.input,
+      name: this.capitalize(this.state.input),
     });
     e.preventDefault();
     this.setState( {
@@ -42,7 +42,18 @@ class App extends Component {
     this.setState({
       input: e.target.value,
     })
-    console.log(this.state);
+  }
+
+  capitalize(string) {
+    const separators = ['-', ' '];
+    let capitalizedString = string.toLowerCase();
+    separators.forEach((separator) => {
+        capitalizedString = capitalizedString.split(separator)
+        .map((string) => string.charAt(0).toUpperCase() + string.slice(1))
+        .join(separator);
+      }
+    )
+    return capitalizedString;
   }
 
   shufflePlayers() {
