@@ -1,73 +1,107 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+// const initialNumberOfPlayers = 1;
 
 class App extends Component {
+
   constructor() {
     super();
-    this.state = {playersNumber: 3}
+    this.state = {
+      players: [],
+      counter: 0,
+      input: "",
+    }
+    this.removePlayer = this.removePlayer.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  // changePlayersNumber() {
-  //
-  // }
+  removePlayer(index) {
+    let shortenPlayers = this.state.players.filter(player => Number(player.key) !== index );
+    this.setState( {
+      players:  shortenPlayers,
+    } )
+  }
+
+  handleSubmit(e) {
+    this.state.players.push({
+      key: this.state.counter,
+      name: this.state.input,
+    });
+    e.preventDefault();
+    this.setState( {
+      players: this.state.players,
+      counter: this.state.counter + 1,
+    })
+  }
+
+  handleChange(e) {
+    this.setState({
+      input: e.target.value,
+    })
+  }
 
   render() {
-    const playerFields = [];
-    for (var i = 0; i < this.state.playersNumber; i++) {
-      playerFields.push(< Players />);
-    };
+    const players = this.state.players.map((player) =>
+    <li
+      className="player-item"
+      key={ player.key }>
+      < Player name={ player.name }
+      index={ player.key }
+      removePlayer={ this.removePlayer }/>
+    </li>
+    );
 
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Tournament</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div>{playerFields}</div>
+        < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } />
+        <ul>{players}</ul>
+        < CreateTournament />
       </div>
     );
   }
 }
 
-class Players extends Component {
-
-  addPlayerField() {
-
-  }
-
-  render() {
-    return (
-      <div>
-        < NameForm />
-        < AddPlayerFieldBtn />
-      </div>
-    )
-  }
+function PlayerForm({ addPlayer, handleChange, handleSubmit }) {
+  return (
+    <div>
+      < InputPlayer handleChange={ handleChange } handleSubmit={ handleSubmit } />
+    </div>
+  )
 }
 
-
-class NameForm extends Component {
-  render() {
-    return (
-      <div>
-        <form>
-          <input></input>
-        </form>
-      </div>
-    )
-  }
+function InputPlayer({ handleChange, handleSubmit }){
+  return (
+    <div>
+      <form>
+        <input onBlur={handleChange}></input>
+        <button onClick={handleSubmit} className="btn btn-sunshine" type="submit">Add this Player</button>
+      </form>
+    </div>
+  )
 }
 
-class AddPlayerFieldBtn extends Component {
-  render() {
-    return (
-      <button onClick={this.changePlayersNumber}>Add a player</button>
-    )
-  }
+function Player({index, removePlayer, name}) {
+  return (
+    <div>
+      <div> {name} </div>
+      < RemovePlayerBtn index= { index } removePlayer={removePlayer} />
+    </div>
+  )
 }
+
+function RemovePlayerBtn({removePlayer, index}) {
+  return <button className="btn btn-sunshine" onClick={() => removePlayer(index)}>X</button>
+}
+
+function CreateTournament() {
+  return <button className="btn btn-ocean">Create</button>
+}
+
 
 export default App;
