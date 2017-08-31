@@ -17,19 +17,6 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-
-  // increasePlayersNumber() {
-  //   // Why are we ONLY pushing in the array for it to work?
-  //   // I thought I needed to setState of playerFields: this.state.playerFields to update playerfields.
-  //   // Should I use a non mutating way of doing this?
-  //   this.state.players.push(<li className="player-item" key={ this.state.playersNumber+1 }>< Player name="Laura" index={ this.state.playersNumber+1 } removePlayerField={this.removePlayerField}/></li>);
-  //   this.setState( {
-  //     playersNumber: this.state.playersNumber+1,
-  //
-  //   } )
-  //   console.log('playersNumber: ', this.state.playersNumber+1);
-  // }
-
   removePlayer(index) {
     let shortenPlayers = this.state.players.filter(player => Number(player.key) !== index );
     this.setState( {
@@ -55,23 +42,14 @@ class App extends Component {
     })
   }
 
-  // componentWillMount() {
-  //   this.state.players.push(<li
-  //     className="player-item"
-  //     key={ this.state.counter }>
-  //       < Player index={ this.state.counter } removePlayerField={this.removePlayerField}/>
-  //   </li>);
-  // }
-
   render() {
-    console.log(this.state.players);
     const players = this.state.players.map((player) =>
     <li
       className="player-item"
       key={ player.key }>
       < Player name={ player.name }
       index={ player.key }
-      removePlayer={this.removePlayer(player.key)}/>
+      removePlayer={ this.removePlayer }/>
     </li>
     );
 
@@ -118,7 +96,7 @@ function Player({index, removePlayer, name}) {
 }
 
 function RemovePlayerBtn({removePlayer, index}) {
-  return <button className="btn btn-sunshine" onClick={removePlayer}>X</button>
+  return <button className="btn btn-sunshine" onClick={() => removePlayer(index)}>X</button>
 }
 
 function CreateTournament() {
