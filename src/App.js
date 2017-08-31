@@ -14,7 +14,8 @@ class App extends Component {
     }
     this.removePlayer = this.removePlayer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.shufflePlayers = this.shufflePlayers.bind(this);
   }
 
   removePlayer(index) {
@@ -42,6 +43,20 @@ class App extends Component {
     })
   }
 
+  shufflePlayers() {
+    const shuffledPlayers = this.state.players;
+    for (var i = shuffledPlayers.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = shuffledPlayers[i];
+      shuffledPlayers[i] = shuffledPlayers[j];
+      shuffledPlayers[j] = temp;
+    }
+
+    this.setState({
+      players: shuffledPlayers,
+    })
+  }
+
   render() {
     const players = this.state.players.map((player) =>
     <li
@@ -61,7 +76,7 @@ class App extends Component {
         </div>
         < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } />
         <ul>{players}</ul>
-        < CreateTournament />
+        < CreateTournament shufflePlayers={ this.shufflePlayers }/>
       </div>
     );
   }
@@ -99,8 +114,8 @@ function RemovePlayerBtn({removePlayer, index}) {
   return <button className="btn btn-sunshine" onClick={() => removePlayer(index)}>X</button>
 }
 
-function CreateTournament() {
-  return <button className="btn btn-ocean">Create</button>
+function CreateTournament({ shufflePlayers }) {
+  return <button className="btn btn-ocean" onClick={ shufflePlayers }>Create</button>
 }
 
 
