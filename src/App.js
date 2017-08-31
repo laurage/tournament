@@ -34,6 +34,7 @@ class App extends Component {
     this.setState( {
       players: this.state.players,
       counter: this.state.counter + 1,
+      input: "",
     })
   }
 
