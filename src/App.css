@@ -90,24 +90,31 @@ input {
   list-style: none;
 }
 
-.btn {
+.tile {
+	width: 330px;
   padding: 20px;
   margin: 5px;
-  border-radius: 10px;
+  border-radius: 5px;
+	border-width: 5px;
 }
 
-.btn-sunshine {
-  background-color: #f4d127;
+.btn-add {
+  background-color: #B2BAFA;
+	border-color: #8192F7;
+	color: #5E6FD6;
 }
 
-.btn-sunshine:hover {
-  background-color: #f4b601
+.btn-add:hover {
+	color: white;
+  background-color: #8192F7;
 }
 
-.btn-ocean {
-  background-color: #ff8693;
+.btn-next {
+  background-color: #B2BAFA;
+	color: white;
 }
 
-.btn-ocean:hover {
-  background-color: #ff6f69
+.btn-next:hover {
+  background-color: white;
+	color: #5E6FD6;
 }

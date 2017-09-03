@@ -105,7 +105,9 @@ function InputPlayer({ handleChange, handleSubmit, input }){
     <div>
       <form>
         <input onChange={ handleChange } value={ input }></input>
-        <button onClick={ handleSubmit } className="btn btn-sunshine" type="submit">Add this Player</button>
+        <div>
+          <button onClick={ handleSubmit } className="tile btn-add" type="submit">Add</button>
+        </div>
       </form>
     </div>
   )
@@ -125,7 +127,7 @@ function RemovePlayerBtn({removePlayer, index}) {
 }
 
 function CreateTournament({ shufflePlayers }) {
-  return <button className="btn btn-ocean" onClick={ shufflePlayers }>Create</button>
+  return <button className="tile btn-next" onClick={ shufflePlayers }>Create</button>
 }
 
 export default GeneratePlayers;
