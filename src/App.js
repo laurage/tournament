@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 // const initialNumberOfPlayers = 1;
 
@@ -83,13 +82,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Tournament</h2>
-        </div>
+        < Header />
         < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.state.input } />
         <ul>{players}</ul>
-        < CreateTournament shufflePlayers={ this.shufflePlayers }/>
+        < Footer shufflePlayers={ this.shufflePlayers }/>
       </div>
     );
   }
@@ -133,6 +129,22 @@ function RemovePlayerBtn({removePlayer, index}) {
 
 function CreateTournament({ shufflePlayers }) {
   return <button className="btn btn-ocean" onClick={ shufflePlayers }>Create</button>
+}
+
+function Header() {
+  return (
+    <div>
+      <h1>ADD PLAYERS TO THE TOURNAMENT</h1>
+    </div>
+  )
+}
+
+function Footer({ shufflePlayers }) {
+  return (
+    <div>
+      < CreateTournament shufflePlayers= { shufflePlayers }/>
+    </div>
+  )
 }
 
 
