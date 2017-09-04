@@ -1,16 +1,23 @@
 import React from 'react';
-import './footer.css';
+
+import { BannerWrapper } from '../Common/BannerWrapper.styles.jsx'
+import { NextTile } from '../Common/Tile.styles.jsx';
+import { Button } from '../Common/Button.styles.jsx'
 
 function Footer({ shufflePlayers }) {
   return (
-    <div className='footer'>
+    <BannerWrapper>
       < CreateTournament shufflePlayers= { shufflePlayers }/>
-    </div>
+    </BannerWrapper>
   )
 }
 
 function CreateTournament({ shufflePlayers }) {
-  return <button className="tile btn-next" onClick={ shufflePlayers }>Create</button>
+  return (
+    <NextTile>
+      <Button onClick={ shufflePlayers }>Create</Button>
+    </NextTile>
+  )
 }
 
 export default Footer;

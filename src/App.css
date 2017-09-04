@@ -15,14 +15,20 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, textarea, input, button {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-family: 'Nunito', sans-serif;
 }
+
+textarea:focus, input:focus, button:focus {
+    outline: none;
+}
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -54,67 +60,10 @@ button {
   width: auto;
   overflow: visible;
   cursor: pointer;
-}
-
-input {
-  padding-top:5px;
-  margin-top: 5px;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
+	color: inherit;
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
-
-.player-field-item {
-  list-style: none;
-}
-
-.tile {
-	width: 330px;
-  padding: 20px;
-  margin: 5px;
-  border-radius: 5px;
-	border-width: 5px;
-}
-
-.btn-add {
-  background-color: #B2BAFA;
-	border-color: #8192F7;
-	color: #5E6FD6;
-}
-
-.btn-add:hover {
-	color: white;
-  background-color: #8192F7;
-}
-
-.btn-next {
-  background-color: #B2BAFA;
-	color: white;
-}
-
-.btn-next:hover {
-  background-color: white;
-	color: #5E6FD6;
 }

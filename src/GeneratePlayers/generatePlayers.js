@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Footer from '../Footer/footer';
 
+import { Tile, NestTile, AddTile, PlayerTile } from '../Common/Tile.styles.jsx';
+import { Button } from '../Common/Button.styles.jsx'
+import { Input } from '../Common/Input.styles.jsx'
+import { AlignCenterWrapper } from '../Common/AlignCenterWrapper.styles.jsx'
+
 class GeneratePlayers extends Component {
   constructor() {
     super();
@@ -70,7 +75,6 @@ class GeneratePlayers extends Component {
   render() {
     const players = this.state.players.map((player) =>
     <li
-      className="player-item"
       key={ player.key }>
       < Player name={ player.name }
       index={ player.key }
@@ -104,10 +108,12 @@ function InputPlayer({ handleChange, handleSubmit, input }){
   return (
     <div>
       <form>
-        <input onChange={ handleChange } value={ input }></input>
-        <div>
-          <button onClick={ handleSubmit } className="tile btn-add" type="submit">Add</button>
-        </div>
+        <AlignCenterWrapper>
+          <Input onChange={ handleChange } value={ input } placeholder={ "Player's name" }></Input>
+          <AddTile>
+            <Button onClick={ handleSubmit } type="submit">Add</Button>
+          </AddTile>
+        </AlignCenterWrapper>
       </form>
     </div>
   )
@@ -115,20 +121,17 @@ function InputPlayer({ handleChange, handleSubmit, input }){
 
 function Player({index, removePlayer, name}) {
   return (
-    <div>
+    <PlayerTile>
       <div> {name} </div>
       < RemovePlayerBtn index= { index } removePlayer={removePlayer} />
-    </div>
+    </PlayerTile>
   )
 }
 
 function RemovePlayerBtn({removePlayer, index}) {
-  return <button className="btn btn-sunshine" onClick={() => removePlayer(index)}>X</button>
+  return <button onClick={() => removePlayer(index)}>X</button>
 }
 
-function CreateTournament({ shufflePlayers }) {
-  return <button className="tile btn-next" onClick={ shufflePlayers }>Create</button>
-}
+
 
 export default GeneratePlayers;
-export { CreateTournament };
