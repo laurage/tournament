@@ -21,20 +21,21 @@ class GeneratePlayers extends Component {
   }
 
   removePlayer(index) {
-    let shortenPlayers = this.state.players.filter(player => Number(player.key) !== index );
+    const { players } = this.state;
+    let shortenPlayers = players.filter(player => Number(player.key) !== index );
     this.setState( {
       players:  shortenPlayers,
     } )
   }
 
   handleSubmit(e) {
-    this.state.players.push({
-      key: this.state.counter,
-      name: this.capitalize(this.state.input),
-    });
     e.preventDefault();
+    const { players, counter, input } = this.state;
     this.setState( {
-      players: this.state.players,
+      players: [...players, {
+        key: counter,
+        name: this.capitalize(input),
+      }],
       counter: this.state.counter + 1,
       input: "",
     })
@@ -85,7 +86,7 @@ class GeneratePlayers extends Component {
     return(
       <div>
         < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.state.input } />
-        <ul>{players}</ul>
+        <ul>{ players }</ul>
         < Footer shufflePlayers={ this.shufflePlayers }/>
       </div>
     );
