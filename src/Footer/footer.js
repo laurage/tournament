@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BannerWrapper } from '../Common/BannerWrapper.styles.jsx'
-import { NextTile } from '../Common/Tile.styles.jsx';
+import { Tile } from '../Common/Tile.styles.jsx';
 import { Button } from '../Common/Button.styles.jsx'
 
 function Footer({ shufflePlayers }) {
@@ -14,9 +14,9 @@ function Footer({ shufflePlayers }) {
 
 function CreateTournament({ shufflePlayers }) {
   return (
-    <NextTile>
+    <Tile styleNextTile>
       <Button onClick={ shufflePlayers }>Create</Button>
-    </NextTile>
+    </Tile>
   )
 }
 

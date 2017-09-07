@@ -7,35 +7,35 @@ export const Tile = styled.div`
   border-radius: 5px;
   border-width: 5px;
   border: solid;
-`
-// replace with modifiers
-export const AddTile = styled(Tile)`
-  background-color: ${props => props.theme.colors.primaryHue};
-  border-color: ${props => props.theme.colors.primaryDarker};
-  color: ${props => props.theme.colors.primaryDarkest};
 
-  &:hover {
-  	color: ${props => props.theme.colors.primaryLightest};
-    background-color: ${props => props.theme.colors.primaryDarker};
-  	border-color: ${props => props.theme.colors.primaryDarker};
-  }
-`
+  ${props => props.styleAddTile &&`
+    background-color: ${props.theme.colors.primaryHue};
+    border-color: ${props.theme.colors.primaryDarker};
+    color: ${props.theme.colors.primaryDarkest};
 
-export const NextTile = styled(Tile)`
-  background-color: ${props => props.theme.colors.primaryHue};
-  border-color: ${props => props.theme.colors.primaryLightest};
-  color: ${props => props.theme.colors.primaryLightest};
+    &:hover {
+      color: ${props.theme.colors.primaryLightest};
+      background-color: ${props.theme.colors.primaryDarker};
+      border-color: ${props.theme.colors.primaryDarker};
+    }
+  `}
 
-  &:hover {
-    background-color: ${props => props.theme.colors.primaryLightest};
-  	color: ${props => props.theme.colors.primaryDarkest};
-  }
-`
+  ${props => props.styleNextTile &&`
+    background-color: ${props.theme.colors.primaryHue};
+    border-color: ${props.theme.colors.primaryLightest};
+    color: ${props.theme.colors.primaryLightest};
 
-export const PlayerTile = styled(Tile)`
-  display: flex;
-  justify-content: space-between;
-  background-color: ${props => props.theme.colors.secondaryHueOne};
-  color: ${props => props.theme.colors.secondaryDarkerOne};
-  border-color: ${props => props.theme.colors.secondaryHueOne};
+    &:hover {
+      background-color: ${props.theme.colors.primaryLightest};
+      color: ${props.theme.colors.primaryDarkest};
+    }
+  `}
+
+  ${props => props.stylePlayerTile &&`
+    display: flex;
+    justify-content: space-between;
+    background-color: ${props.theme.colors.secondaryHueOne};
+    color: ${props.theme.colors.secondaryDarkerOne};
+    border-color: ${props.theme.colors.secondaryHueOne};
+  `}
 `

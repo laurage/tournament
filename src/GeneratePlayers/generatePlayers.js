@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Footer from '../Footer/footer';
 
-import { Tile, NestTile, AddTile, PlayerTile } from '../Common/Tile.styles.jsx';
+import { Tile } from '../Common/Tile.styles.jsx';
 import { Button } from '../Common/Button.styles.jsx'
 import { Input } from '../Common/Input.styles.jsx'
 import { AlignCenterWrapper } from '../Common/AlignCenterWrapper.styles.jsx'
@@ -107,9 +107,9 @@ function InputPlayer({ handleChange, handleSubmit, input }){
       <form>
         <AlignCenterWrapper>
           <Input onChange={ handleChange } value={ input } placeholder={ "Player's name" }></Input>
-          <AddTile>
+          <Tile styleAddTile>
             <Button onClick={ handleSubmit } type="submit">Add</Button>
-          </AddTile>
+          </Tile>
         </AlignCenterWrapper>
       </form>
     </div>
@@ -118,10 +118,10 @@ function InputPlayer({ handleChange, handleSubmit, input }){
 
 function Player({index, removePlayer, name}) {
   return (
-    <PlayerTile>
+    <Tile stylePlayerTile>
       <div> {name} </div>
       < RemovePlayerBtn index= { index } removePlayer={removePlayer} />
-    </PlayerTile>
+    </Tile>
   )
 }
 
