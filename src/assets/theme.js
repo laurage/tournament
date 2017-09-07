@@ -1,9 +1,28 @@
-export default {
+const colors = {
   snow: "#FFFFFF",
-  //blue
-  portage: "#8192F7", //darker
+  havelockBlue: "#5E6FD6",
   perfume: "#B2BAFA",
-  //brown
+  portage: "#8192F7",
   champagne: "#FAF0D1",
-  tacha: "#D6BE79", //darker
+  tacha: "#D6BE79",
 }
+
+// Darkest > Darker > Hue < Lighter < Lightest
+
+export const theme = {
+  colors: {
+    primaryDarkest: colors.havelockBlue,
+    primaryDarker: colors.portage,
+    primaryHue: colors.perfume,
+    primaryLightest: colors.snow,
+    secondaryDarkerOne: colors.tacha,
+    secondaryHueOne: colors.champagne,
+  }
+}
+
+// primaryVeryDark: colors.havelockBlue,
+// primaryDark: colors.portage,
+// primaryLight: colors.perfume,
+// primaryVeryLight: colors.snow,
+// secondaryDarkOne: colors.tacha,
+// secondaryLightOne: colors.champagne,

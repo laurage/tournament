@@ -4,7 +4,7 @@ export const Input = styled.input`
   padding-bottom: 5px;
 	border-bottom: solid 3px;
 	width: 330px;
-  color: #5E6FD6;
+  color: ${props => props.theme.colors.primaryDarkest};
   padding-top:5px;
   margin-top: 5px;
 `

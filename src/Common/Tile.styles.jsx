@@ -8,34 +8,34 @@ export const Tile = styled.div`
   border-width: 5px;
   border: solid;
 `
-
+// replace with modifiers
 export const AddTile = styled(Tile)`
-  background-color: #B2BAFA;
-  border-color: #8192F7;
-  color: #5E6FD6;
+  background-color: ${props => props.theme.colors.primaryHue};
+  border-color: ${props => props.theme.colors.primaryDarker};
+  color: ${props => props.theme.colors.primaryDarkest};
 
   &:hover {
-  	color: white;
-    background-color: #8192F7;
-  	border-color: #8192F7;
+  	color: ${props => props.theme.colors.primaryLightest};
+    background-color: ${props => props.theme.colors.primaryDarker};
+  	border-color: ${props => props.theme.colors.primaryDarker};
   }
 `
 
 export const NextTile = styled(Tile)`
-  background-color: #B2BAFA;
-  border-color: white;
-  color: white;
+  background-color: ${props => props.theme.colors.primaryHue};
+  border-color: ${props => props.theme.colors.primaryLightest};
+  color: ${props => props.theme.colors.primaryLightest};
 
   &:hover {
-    background-color: white;
-  	color: #5E6FD6;
+    background-color: ${props => props.theme.colors.primaryLightest};
+  	color: ${props => props.theme.colors.primaryDarkest};
   }
 `
 
 export const PlayerTile = styled(Tile)`
   display: flex;
   justify-content: space-between;
-  background-color: #FAF0D1;
-  color: #D6BE79;
-  border-color: #FAF0D1;
+  background-color: ${props => props.theme.colors.secondaryHueOne};
+  color: ${props => props.theme.colors.secondaryDarkerOne};
+  border-color: ${props => props.theme.colors.secondaryHueOne};
 `
