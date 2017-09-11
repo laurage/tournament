@@ -34,8 +34,8 @@ class GeneratePlayers extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(e.target.input);
-    const playerName = this.refs.playerName.value;
+    console.log(e.target.querySelector('input'));
+    const playerName = e.target.querySelector('input').value;
     this.props.addPlayer(1, playerName);
     // const { players, counter, input } = this.state;
     // this.setState( {
@@ -92,7 +92,7 @@ class GeneratePlayers extends Component {
 
     return(
       <div>
-        < PlayerForm handleSubmit={ this.handleSubmit } input={ this.state.input } />
+        < PlayerForm handleSubmit={ this.handleSubmit } />
         <ul>{ players }</ul>
         < Footer shufflePlayers={ this.shufflePlayers }/>
       </div>
@@ -100,15 +100,15 @@ class GeneratePlayers extends Component {
   }
 }
 
-function PlayerForm({ addPlayer, handleSubmit, input }) {
+function PlayerForm({ addPlayer, handleSubmit }) {
   return (
     <div>
-      < InputPlayer handleSubmit={ handleSubmit } input={ input } />
+      < InputPlayer handleSubmit={ handleSubmit }  />
     </div>
   )
 }
 
-function InputPlayer({ handleSubmit, input }){
+function InputPlayer({ handleSubmit }){
   return (
     <div>
       <form>
