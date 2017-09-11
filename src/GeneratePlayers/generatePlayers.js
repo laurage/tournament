@@ -8,19 +8,14 @@ import { AlignCenterWrapper } from '../Common/AlignCenterWrapper.styles.jsx'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actionCreators from '../Actions/PlayersActions';
+import { addPlayer } from '../Actions/PlayersActions';
+const counter = 0;
 
 class GeneratePlayers extends Component {
   constructor() {
     super();
-    this.state = {
-      players: [],
-      counter: 0,
-      input: "",
-    }
     this.removePlayer = this.removePlayer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
     this.shufflePlayers = this.shufflePlayers.bind(this);
   }
 
@@ -34,9 +29,10 @@ class GeneratePlayers extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log("props", this.props);
     console.log(e.target.querySelector('input'));
-    const playerName = e.target.querySelector('input').value;
-    this.props.addPlayer(1, playerName);
+    const playerName = e.target.querySelector('input');
+    this.props.addPlayer(1, "laura");
     // const { players, counter, input } = this.state;
     // this.setState( {
     //   players: [...players, {
@@ -81,6 +77,7 @@ class GeneratePlayers extends Component {
   }
 
   render() {
+    console.log("props", this.props)
     const players = this.state.players.map((player) =>
     <li
       key={ player.key }>
@@ -143,7 +140,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispachToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
+  return bindActionCreators(addPlayer, dispatch);
 }
 
 const App = connect(mapStateToProps, mapDispachToProps)(GeneratePlayers);

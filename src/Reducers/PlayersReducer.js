@@ -14,6 +14,7 @@ const addPlayer = (state = initialState, action) => {
       return [
           ...state,
           {
+            playerId: action.playerId,
             playerName: action.playerName
           }
           // counter: state.counter + 1,
