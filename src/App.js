@@ -8,19 +8,24 @@ import GeneratePlayers from './GeneratePlayers/generatePlayers';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './assets/theme.js';
 
+import { Provider } from 'react-redux';
+import { store } from './store';
+
 
 class App extends Component {
 
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <div>
-          < Header />
-          <Main>
-            < GeneratePlayers />
-          </Main>
-          < Footer />
-        </div>
+        <Provider store={store}>
+          <div>
+            < Header />
+            <Main>
+              < GeneratePlayers />
+            </Main>
+            < Footer />
+          </div>
+        </Provider>
       </ThemeProvider>
     );
   }
