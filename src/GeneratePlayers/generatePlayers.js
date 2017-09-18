@@ -30,9 +30,10 @@ class GeneratePlayers extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log("props", this.props);
-    console.log(e.target.querySelector('input'));
+    console.log(e.target.value);
     const playerName = e.target.querySelector('input');
-    this.props.addPlayer(1, "laura");
+
+    console.log("props2", this.props);
     // const { players, counter, input } = this.state;
     // this.setState( {
     //   players: [...players, {
@@ -77,23 +78,29 @@ class GeneratePlayers extends Component {
   }
 
   render() {
-    console.log("props", this.props)
-    const players = this.state.players.map((player) =>
-    <li
-      key={ player.key }>
-      < Player name={ player.name }
-      index={ player.key }
-      removePlayer={ this.removePlayer }/>
-    </li>
-    );
-
+    this.props.addPlayer(4, "Ivy");
+    console.log("PROPS", this.props);
+    console.log("state", this.state);
+    // const players = this.props.players.map((player) =>
+    // <li
+    //   key={ player.key }>
+    //   < Player name={ player.name }
+    //   index={ player.key }
+    //   removePlayer={ this.removePlayer }/>
+    // </li>
+    // );
+    //
     return(
       <div>
-        < PlayerForm handleSubmit={ this.handleSubmit } />
-        <ul>{ players }</ul>
-        < Footer shufflePlayers={ this.shufflePlayers }/>
+      Hi
       </div>
-    );
+    )
+    //   <div>
+    //     < PlayerForm handleSubmit={ this.handleSubmit } />
+    //     <ul>{ players }</ul>
+    //     < Footer shufflePlayers={ this.shufflePlayers }/>
+    //   </div>
+  // );
   }
 }
 
@@ -133,16 +140,15 @@ function RemovePlayerBtn({removePlayer, index}) {
   return <button onClick={() => removePlayer(index)}>X</button>
 }
 
-function mapStateToProps(state) {
-  return {
-    players: state.players
-  }
+export const mapStateToProps = state => ({
+  players: state.players,
+})
+
+export const mapDispachToProps = {
+  addPlayer,
 }
 
-function mapDispachToProps(dispatch) {
-  return bindActionCreators(addPlayer, dispatch);
-}
-
-const App = connect(mapStateToProps, mapDispachToProps)(GeneratePlayers);
-
-export default App;
+export default connect(
+  mapStateToProps,
+  mapDispachToProps
+)(GeneratePlayers);
