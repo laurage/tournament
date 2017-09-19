@@ -19,6 +19,10 @@ class GeneratePlayers extends Component {
     this.shufflePlayers = this.shufflePlayers.bind(this);
   }
 
+ componentWillMount() {
+   this.props.addPlayer(4, "Ivy");
+ }
+
   removePlayer(index) {
     const { players } = this.state;
     let shortenPlayers = players.filter(player => Number(player.key) !== index );
@@ -78,7 +82,8 @@ class GeneratePlayers extends Component {
   }
 
   render() {
-    this.props.addPlayer(4, "Ivy");
+    //render runs again everytime there is a new props, so if we do this.props.addplayer in there, it will rerender again and againg => infinite loop
+
     console.log("PROPS", this.props);
     console.log("state", this.state);
     // const players = this.props.players.map((player) =>
@@ -92,7 +97,7 @@ class GeneratePlayers extends Component {
     //
     return(
       <div>
-      Hi
+      {this.props.players.map(player=><div>{player.playerName}</div>)}
       </div>
     )
     //   <div>

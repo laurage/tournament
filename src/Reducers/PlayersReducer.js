@@ -1,25 +1,31 @@
 import { combineReducers } from 'redux';
 import { store } from '../store';
 
-const initialState = {
+const initialState = []
 
-}
-
-const addPlayer = (state = initialState, action) => {
+const playerReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_PLAYER":
-      // console.log("ACTION");
-      // console.log("state", ...state);
-      return {
+      console.log("ACTION");
+      console.log("action", action);
+      console.log("state", ...state);
+      return [
             ...state,
-            playerId: "1",
-            playerName: "other"
-      };
+            {
+              playerId: action.playerId,
+              playerName: action.playerName
+            }
+      ];
     default:
       return state
     }
 }
 
 export const rootReducer = combineReducers({
-  addPlayer
+  players: playerReducer
 })
+
+/*
+...state => []
+...state => [{playerId:"1", playerName:"laura"}{etc}]
+*/
