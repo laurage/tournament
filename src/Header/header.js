@@ -1,10 +1,14 @@
+import '../App.css';
+import { Title } from '../Common/Text.styles.jsx'
+import { BannerWrapper } from '../Common/BannerWrapper.styles.jsx'
+
 import React from 'react';
 
 function Header() {
   return (
-    <div>
-      <h1>ADD PLAYERS TO THE TOURNAMENT</h1>
-    </div>
+    <BannerWrapper>
+      <Title>ADD PLAYERS TO THE TOURNAMENT</Title>
+    </BannerWrapper>
   )
 }
 

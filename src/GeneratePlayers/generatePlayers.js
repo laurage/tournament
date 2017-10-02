@@ -1,35 +1,32 @@
 import React, { Component } from 'react';
 import Footer from '../Footer/footer';
 
+import { Tile } from '../Common/Tile.styles.jsx';
+import { Button } from '../Common/Button.styles.jsx'
+import { Input } from '../Common/Input.styles.jsx'
+import { AlignCenterWrapper } from '../Common/AlignCenterWrapper.styles.jsx'
+
+import { connect } from 'react-redux';
+import { addPlayer, removePlayer } from '../Actions/PlayersActions';
+
 class GeneratePlayers extends Component {
   constructor() {
     super();
-    this.state = {
-      players: [],
-      counter: 0,
-      input: "",
-    }
     this.removePlayer = this.removePlayer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.shufflePlayers = this.shufflePlayers.bind(this);
+    this.state = {input:"", counter: 0};
   }
 
-  removePlayer(index) {
-    let shortenPlayers = this.state.players.filter(player => Number(player.key) !== index );
-    this.setState( {
-      players:  shortenPlayers,
-    } )
+  removePlayer(playerId) {
+    this.props.removePlayer(playerId);
   }
 
   handleSubmit(e) {
-    this.state.players.push({
-      key: this.state.counter,
-      name: this.capitalize(this.state.input),
-    });
     e.preventDefault();
-    this.setState( {
-      players: this.state.players,
+    this.props.addPlayer(this.state.counter, this.capitalize(this.state.input));
+    this.setState({
       counter: this.state.counter + 1,
       input: "",
     })
@@ -40,6 +37,7 @@ class GeneratePlayers extends Component {
       input: e.target.value,
     })
   }
+  // inputPlayer(e.target.value)
 
   capitalize(string) {
     const separators = ['-', ' '];
@@ -68,65 +66,73 @@ class GeneratePlayers extends Component {
   }
 
   render() {
-    const players = this.state.players.map((player) =>
-    <li
-      className="player-item"
-      key={ player.key }>
-      < Player name={ player.name }
-      index={ player.key }
-      removePlayer={ this.removePlayer }/>
-    </li>
+    const players = this.props.players.map((player) =>
+      <li
+        key={ player.playerId }>
+        < Player name={ player.playerName }
+        playerId= { player.playerId }
+        removePlayer={ this.removePlayer }/>
+      </li>
     );
 
     return(
       <div>
+
         < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.state.input } />
-        <ul>{players}</ul>
+        <ul>{ players }</ul>
         < Footer shufflePlayers={ this.shufflePlayers }/>
+
       </div>
-    );
+    )
   }
 }
 
 function PlayerForm({ addPlayer, handleChange, handleSubmit, input }) {
   return (
     <div>
-      < InputPlayer handleChange={ handleChange } handleSubmit={ handleSubmit } input={ input } />
+      < InputPlayer handleChange={ handleChange } handleSubmit={ handleSubmit } input={ input }  />
     </div>
   )
 }
 
 function InputPlayer({ handleChange, handleSubmit, input }){
-  // Used onBlur to only trigger a new state when clicking on the button,
-  // but if I also want to erase the value in input on that click, I need to give a value to input
-  // And that means I need to constantly give a value, which means I need to use onChange and not onBlur. Work around?
-
   return (
     <div>
       <form>
-        <input onChange={ handleChange } value={ input }></input>
-        <button onClick={ handleSubmit } className="btn btn-sunshine" type="submit">Add this Player</button>
+        <AlignCenterWrapper>
+          <Input onChange={ handleChange } placeholder={ "Player\'s name" } value={ input }></Input>
+          <Tile styleAddTile>
+          <Button onClick={ handleSubmit } type="submit">Add</Button>
+          </Tile>
+        </AlignCenterWrapper>
       </form>
     </div>
   )
 }
 
-function Player({index, removePlayer, name}) {
+function Player({playerId, removePlayer, name}) {
   return (
-    <div>
+    <Tile stylePlayerTile>
       <div> {name} </div>
-      < RemovePlayerBtn index= { index } removePlayer={removePlayer} />
-    </div>
+      < RemovePlayerBtn playerId={ playerId } removePlayer={removePlayer} />
+    </Tile>
   )
 }
 
-function RemovePlayerBtn({removePlayer, index}) {
-  return <button className="btn btn-sunshine" onClick={() => removePlayer(index)}>X</button>
+function RemovePlayerBtn({playerId, removePlayer}) {
+  return <button onClick={() => removePlayer(playerId)}>X</button>
 }
 
-function CreateTournament({ shufflePlayers }) {
-  return <button className="btn btn-ocean" onClick={ shufflePlayers }>Create</button>
+export const mapStateToProps = state => ({
+  players: state.players,
+})
+
+export const mapDispachToProps = {
+  addPlayer,
+  removePlayer,
 }
 
-export default GeneratePlayers;
-export { CreateTournament };
+export default connect(
+  mapStateToProps,
+  mapDispachToProps
+)(GeneratePlayers);

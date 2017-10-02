@@ -1,11 +1,22 @@
 import React from 'react';
-import { CreateTournament } from '../GeneratePlayers/generatePlayers';
+
+import { BannerWrapper } from '../Common/BannerWrapper.styles.jsx'
+import { Tile } from '../Common/Tile.styles.jsx';
+import { Button } from '../Common/Button.styles.jsx'
 
 function Footer({ shufflePlayers }) {
   return (
-    <div>
+    <BannerWrapper>
       < CreateTournament shufflePlayers= { shufflePlayers }/>
-    </div>
+    </BannerWrapper>
+  )
+}
+
+function CreateTournament({ shufflePlayers }) {
+  return (
+    <Tile styleNextTile>
+      <Button onClick={ shufflePlayers }>Create</Button>
+    </Tile>
   )
 }
 
