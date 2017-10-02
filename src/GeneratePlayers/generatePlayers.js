@@ -7,37 +7,40 @@ import { Input } from '../Common/Input.styles.jsx'
 import { AlignCenterWrapper } from '../Common/AlignCenterWrapper.styles.jsx'
 
 import { connect } from 'react-redux';
-import { addPlayer, removePlayer } from '../Actions/PlayersActions';
+import { addPlayer, removePlayer, inputPlayer } from '../Actions/PlayersActions';
 
 class GeneratePlayers extends Component {
   constructor() {
     super();
-    this.removePlayer = this.removePlayer.bind(this);
+    // this.removePlayer = this.removePlayer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.shufflePlayers = this.shufflePlayers.bind(this);
-    this.state = {input:"", counter: 0};
+    this.state = {
+      // input:"",
+      counter: 0};
   }
 
-  removePlayer(playerId) {
-    this.props.removePlayer(playerId);
-  }
+  // removePlayer(playerId) {
+  //   this.props.removePlayer(playerId);
+  // }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.addPlayer(this.state.counter, this.capitalize(this.state.input));
+    this.props.addPlayer(this.state.counter, this.capitalize(this.props.players.input));
     this.setState({
       counter: this.state.counter + 1,
-      input: "",
+      // input: "",
     })
   }
 
   handleChange(e) {
-    this.setState({
-      input: e.target.value,
-    })
+    // this.setState({
+    //   input: e.target.value,
+    // })
+    inputPlayer("e.target.value")
+    console.log("yo");
   }
-  // inputPlayer(e.target.value)
 
   capitalize(string) {
     const separators = ['-', ' '];
@@ -66,7 +69,8 @@ class GeneratePlayers extends Component {
   }
 
   render() {
-    const players = this.props.players.map((player) =>
+    console.log("props", this.props);
+    const players = this.props.players.playersList.map((player) =>
       <li
         key={ player.playerId }>
         < Player name={ player.playerName }
@@ -78,7 +82,7 @@ class GeneratePlayers extends Component {
     return(
       <div>
 
-        < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.state.input } />
+        < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.props.players.input  } />
         <ul>{ players }</ul>
         < Footer shufflePlayers={ this.shufflePlayers }/>
 
@@ -120,7 +124,7 @@ function Player({playerId, removePlayer, name}) {
 }
 
 function RemovePlayerBtn({playerId, removePlayer}) {
-  return <button onClick={() => removePlayer(playerId)}>X</button>
+  // return <button onClick={() => removePlayer(playerId)}>X</button>
 }
 
 export const mapStateToProps = state => ({
@@ -130,6 +134,7 @@ export const mapStateToProps = state => ({
 export const mapDispachToProps = {
   addPlayer,
   removePlayer,
+  inputPlayer,
 }
 
 export default connect(

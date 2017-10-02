@@ -12,3 +12,10 @@ export function removePlayer(playerId) {
     playerId,
   }
 }
+
+export function inputPlayer(input) {
+  return {
+    type: "INPUT_PLAYER",
+    input,
+  }
+}
