@@ -1,6 +1,6 @@
 const initialState = []
 
-export const playerReducer = (state = initialState, action) =>
+export const playerReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_PLAYER":
       return [
