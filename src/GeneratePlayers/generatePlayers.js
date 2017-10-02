@@ -6,54 +6,38 @@ import { Button } from '../Common/Button.styles.jsx'
 import { Input } from '../Common/Input.styles.jsx'
 import { AlignCenterWrapper } from '../Common/AlignCenterWrapper.styles.jsx'
 
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addPlayer } from '../Actions/PlayersActions';
-const counter = 0;
+import { addPlayer, removePlayer } from '../Actions/PlayersActions';
 
 class GeneratePlayers extends Component {
   constructor() {
     super();
     this.removePlayer = this.removePlayer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.shufflePlayers = this.shufflePlayers.bind(this);
+    this.state = {input:"", counter: 0};
   }
 
- componentWillMount() {
-   this.props.addPlayer(4, "Ivy");
- }
-
-  removePlayer(index) {
-    const { players } = this.state;
-    let shortenPlayers = players.filter(player => Number(player.key) !== index );
-    this.setState( {
-      players:  shortenPlayers,
-    } )
+  removePlayer(playerId) {
+    this.props.removePlayer(playerId);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("props", this.props);
-    console.log(e.target.value);
-    const playerName = e.target.querySelector('input');
-
-    console.log("props2", this.props);
-    // const { players, counter, input } = this.state;
-    // this.setState( {
-    //   players: [...players, {
-    //     key: counter,
-    //     name: this.capitalize(input),
-    //   }],
-    //   counter: this.state.counter + 1,
-    //   input: "",
-    // })
+    this.props.addPlayer(this.state.counter, this.capitalize(this.state.input));
+    this.setState({
+      counter: this.state.counter + 1,
+      input: "",
+    })
   }
 
-  // handleChange(e) {
-  //   this.setState({
-  //     input: e.target.value,
-  //   })
-  // }
+  handleChange(e) {
+    this.setState({
+      input: e.target.value,
+    })
+  }
+  // inputPlayer(e.target.value)
 
   capitalize(string) {
     const separators = ['-', ' '];
@@ -82,49 +66,43 @@ class GeneratePlayers extends Component {
   }
 
   render() {
-    //render runs again everytime there is a new props, so if we do this.props.addplayer in there, it will rerender again and againg => infinite loop
+    const players = this.props.players.map((player) =>
+      <li
+        key={ player.playerId }>
+        < Player name={ player.playerName }
+        playerId= { player.playerId }
+        removePlayer={ this.removePlayer }/>
+      </li>
+    );
 
-    console.log("PROPS", this.props);
-    console.log("state", this.state);
-    // const players = this.props.players.map((player) =>
-    // <li
-    //   key={ player.key }>
-    //   < Player name={ player.name }
-    //   index={ player.key }
-    //   removePlayer={ this.removePlayer }/>
-    // </li>
-    // );
-    //
     return(
       <div>
-      {this.props.players.map(player=><div>{player.playerName}</div>)}
+
+        < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.state.input } />
+        <ul>{ players }</ul>
+        < Footer shufflePlayers={ this.shufflePlayers }/>
+
       </div>
     )
-    //   <div>
-    //     < PlayerForm handleSubmit={ this.handleSubmit } />
-    //     <ul>{ players }</ul>
-    //     < Footer shufflePlayers={ this.shufflePlayers }/>
-    //   </div>
-  // );
   }
 }
 
-function PlayerForm({ addPlayer, handleSubmit }) {
+function PlayerForm({ addPlayer, handleChange, handleSubmit, input }) {
   return (
     <div>
-      < InputPlayer handleSubmit={ handleSubmit }  />
+      < InputPlayer handleChange={ handleChange } handleSubmit={ handleSubmit } input={ input }  />
     </div>
   )
 }
 
-function InputPlayer({ handleSubmit }){
+function InputPlayer({ handleChange, handleSubmit, input }){
   return (
     <div>
       <form>
         <AlignCenterWrapper>
-          <Input onClick={ handleSubmit } placeholder={ "Player\'s name" }></Input>
+          <Input onChange={ handleChange } placeholder={ "Player\'s name" } value={ input }></Input>
           <Tile styleAddTile>
-            <Button type="submit">Add</Button>
+          <Button onClick={ handleSubmit } type="submit">Add</Button>
           </Tile>
         </AlignCenterWrapper>
       </form>
@@ -132,17 +110,17 @@ function InputPlayer({ handleSubmit }){
   )
 }
 
-function Player({index, removePlayer, name}) {
+function Player({playerId, removePlayer, name}) {
   return (
     <Tile stylePlayerTile>
       <div> {name} </div>
-      < RemovePlayerBtn index= { index } removePlayer={removePlayer} />
+      < RemovePlayerBtn playerId={ playerId } removePlayer={removePlayer} />
     </Tile>
   )
 }
 
-function RemovePlayerBtn({removePlayer, index}) {
-  return <button onClick={() => removePlayer(index)}>X</button>
+function RemovePlayerBtn({playerId, removePlayer}) {
+  return <button onClick={() => removePlayer(playerId)}>X</button>
 }
 
 export const mapStateToProps = state => ({
@@ -151,6 +129,7 @@ export const mapStateToProps = state => ({
 
 export const mapDispachToProps = {
   addPlayer,
+  removePlayer,
 }
 
 export default connect(

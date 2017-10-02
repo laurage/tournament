@@ -1,14 +1,8 @@
-import { combineReducers } from 'redux';
-import { store } from '../store';
-
 const initialState = []
 
-const playerReducer = (state = initialState, action) => {
+export const playerReducer = (state = initialState, action) =>
   switch (action.type) {
     case "ADD_PLAYER":
-      console.log("ACTION");
-      console.log("action", action);
-      console.log("state", ...state);
       return [
             ...state,
             {
@@ -16,16 +10,11 @@ const playerReducer = (state = initialState, action) => {
               playerName: action.playerName
             }
       ];
+    case "REMOVE_PLAYER":
+      let newPlayersList = state.filter(player => player.playerId !== action.playerId );
+      return newPlayersList;
+
     default:
       return state
-    }
+  }
 }
-
-export const rootReducer = combineReducers({
-  players: playerReducer
-})
-
-/*
-...state => []
-...state => [{playerId:"1", playerName:"laura"}{etc}]
-*/

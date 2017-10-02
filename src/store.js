@@ -1,14 +1,12 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { rootReducer } from './Reducers/PlayersReducer'
-import players from './data/players.js'
-import thunk from 'redux-thunk';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
-import createHistory from 'history/createHashHistory';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore} from 'react-router-redux';
+import { createStore } from 'redux'
+
+import { combineReducers } from 'redux';
+import { playerReducer } from './Reducers/PlayersReducer'
+
+export const rootReducer = combineReducers({
+  players: playerReducer
+})
 
 export const store = createStore(rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), //add this line to use Redux Tools in the browser
 );
-
-// compose(applyMiddleware(thunk))

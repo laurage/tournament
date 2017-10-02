@@ -5,3 +5,10 @@ export function addPlayer(playerId, playerName) {
     playerName,
   }
 }
+
+export function removePlayer(playerId) {
+  return {
+    type: "REMOVE_PLAYER",
+    playerId,
+  }
+}
