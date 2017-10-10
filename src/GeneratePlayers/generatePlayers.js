@@ -26,7 +26,6 @@ class GeneratePlayers extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("input:",this.props.players.input);
     this.props.addPlayer(this.state.counter, this.capitalize(this.props.players.input));
     this.props.inputPlayer("");
 
@@ -66,7 +65,6 @@ class GeneratePlayers extends Component {
   }
 
   render() {
-    console.log("props", this.props);
     const players = this.props.players.playersList.map((player) =>
       <li
         key={ player.playerId }>
@@ -119,8 +117,6 @@ function Player({playerId, removePlayer, name}) {
     </Tile>
   )
 }
-
-
 
 function RemovePlayerBtn({playerId, removePlayer}) {
   return <button onClick={() => removePlayer(playerId)}>X</button>

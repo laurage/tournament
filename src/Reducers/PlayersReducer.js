@@ -1,6 +1,7 @@
 const initialState = {
   playersList: [],
   input: "",
+  // generatedPlayersCounter: 0, //how to use a counter that increments in the reducer?
 }
 
 export const playerReducer = (state = initialState, action) => {
@@ -18,7 +19,7 @@ export const playerReducer = (state = initialState, action) => {
       let newPlayersList = state.playersList.filter(player => player.playerId !== action.playerId );
       return {
         ...state,
-        playersList: newPlayersList 
+        playersList: newPlayersList
       };
 
     case "INPUT_PLAYER":
