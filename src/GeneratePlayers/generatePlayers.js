@@ -112,7 +112,7 @@ function InputPlayer({ handleChange, handleSubmit, input }){
 
 function Player({playerId, removePlayer, name}) {
   return (
-    <Tile stylePlayerTile>
+    <Tile stylePlayerTile colour>
       <div> {name} </div>
       < RemovePlayerBtn playerId={ playerId } removePlayer={removePlayer} />
     </Tile>

@@ -5,6 +5,7 @@ const colors = {
   portage: "#8192F7",
   champagne: "#FAF0D1",
   tacha: "#D6BE79",
+  palePink: "#FAD6FA",
 }
 
 // Darkest > Darker > Hue < Lighter < Lightest
@@ -17,6 +18,7 @@ export const theme = {
     primaryLightest: colors.snow,
     secondaryDarkerOne: colors.tacha,
     secondaryHueOne: colors.champagne,
+    secondaryHueTwo: colors.red,
   }
 }
 

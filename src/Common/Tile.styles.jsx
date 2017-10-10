@@ -34,7 +34,7 @@ export const Tile = styled.div`
   ${props => props.stylePlayerTile &&`
     display: flex;
     justify-content: space-between;
-    background-color: ${props.theme.colors.secondaryHueOne};
+    //background-color: ${props => props.colour ? props.theme.colors.secondaryHueOne : props.theme.colors.secondaryHueTwo};//How to pass a random colour?
     color: ${props.theme.colors.secondaryDarkerOne};
     border-color: ${props.theme.colors.secondaryHueOne};
   `}
