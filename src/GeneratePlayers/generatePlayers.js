@@ -12,18 +12,17 @@ import { addPlayer, removePlayer, inputPlayer } from '../Actions/PlayersActions'
 class GeneratePlayers extends Component {
   constructor() {
     super();
-    // this.removePlayer = this.removePlayer.bind(this);
+    this.removePlayer = this.removePlayer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.shufflePlayers = this.shufflePlayers.bind(this);
     this.state = {
-      // input:"",
       counter: 0};
   }
 
-  // removePlayer(playerId) {
-  //   this.props.removePlayer(playerId);
-  // }
+  removePlayer(playerId) {
+    this.props.removePlayer(playerId);
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -33,14 +32,10 @@ class GeneratePlayers extends Component {
 
     this.setState({
       counter: this.state.counter + 1,
-      // input: "",
     })
   }
 
   handleChange(e) {
-    // this.setState({
-    //   input: e.target.value,
-    // })
     this.props.inputPlayer(e.target.value);
   }
 
@@ -120,7 +115,7 @@ function Player({playerId, removePlayer, name}) {
   return (
     <Tile stylePlayerTile>
       <div> {name} </div>
-      < RemovePlayerBtn playerId={ playerId } removePlayer={removePlayer} />
+      < RemovePlayerBtn playerId={ playerId } removePlayer={ removePlayer } />
     </Tile>
   )
 }

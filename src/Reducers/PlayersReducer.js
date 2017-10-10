@@ -14,9 +14,12 @@ export const playerReducer = (state = initialState, action) => {
             }]
       };
 
-    // case "REMOVE_PLAYER":
-    //   let newPlayersList = state.filter(player => player.playerId !== action.playerId );
-    //   return { ...state.playersList: newPlayersList };
+    case "REMOVE_PLAYER":
+      let newPlayersList = state.playersList.filter(player => player.playerId !== action.playerId );
+      return {
+        ...state,
+        playersList: newPlayersList 
+      };
 
     case "INPUT_PLAYER":
       return {
