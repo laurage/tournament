@@ -27,7 +27,10 @@ class GeneratePlayers extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log("input:",this.props.players.input);
     this.props.addPlayer(this.state.counter, this.capitalize(this.props.players.input));
+    this.props.inputPlayer("");
+
     this.setState({
       counter: this.state.counter + 1,
       // input: "",
@@ -38,8 +41,7 @@ class GeneratePlayers extends Component {
     // this.setState({
     //   input: e.target.value,
     // })
-    inputPlayer("e.target.value")
-    console.log("yo");
+    this.props.inputPlayer(e.target.value);
   }
 
   capitalize(string) {
@@ -123,8 +125,10 @@ function Player({playerId, removePlayer, name}) {
   )
 }
 
+
+
 function RemovePlayerBtn({playerId, removePlayer}) {
-  // return <button onClick={() => removePlayer(playerId)}>X</button>
+  return <button onClick={() => removePlayer(playerId)}>X</button>
 }
 
 export const mapStateToProps = state => ({
