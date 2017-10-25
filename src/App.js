@@ -11,6 +11,15 @@ import { theme } from './assets/theme.js';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+const router = (
+  <Router history={browserHistory}>
+    <Route path="/" component={Main}>
+      <IndexRoute component={GeneratePlayers}></IndexRoute>
+    </Route>
+  </Router>
+);
+
 
 class App extends Component {
 
