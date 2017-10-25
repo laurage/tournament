@@ -5,6 +5,7 @@ import Footer from './Footer/footer.js';
 import { Main } from './Common/Main.styles.jsx'
 import GeneratePlayers from './GeneratePlayers/generatePlayers';
 import CreateTournament from './CreateTournament/createTournament';
+import About from './About/about';
 
 import { ThemeProvider } from 'styled-components';
 import { theme } from './assets/theme.js';
@@ -12,6 +13,7 @@ import { theme } from './assets/theme.js';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
+import { Switch, Route } from 'react-router-dom'
 
 class App extends Component {
   render() {
@@ -23,9 +25,12 @@ class App extends Component {
           <div>
             < Header />
             <Main>
-              < GeneratePlayers />
+              <Switch>
+                <Route exact path='/' component={GeneratePlayers}/>
+                <Route exact path='/about' component={About}/>
+              </Switch>
             </Main>
-            < CreateTournament />
+            < Footer />
           </div>
         </Provider>
       </ThemeProvider>
