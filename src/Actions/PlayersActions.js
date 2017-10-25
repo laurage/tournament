@@ -19,3 +19,9 @@ export function inputPlayer(input) {
     input,
   }
 }
+
+export function getPlayers() {
+  return {
+    type: "GET_PLAYERS",
+  }
+}

@@ -28,6 +28,19 @@ export const playerReducer = (state = initialState, action) => {
             input: action.input
       };
 
+    case "GET_PLAYERS":
+      return {
+            ...state,
+            playersList: [
+              { playerId: 1,
+                playerName: "laura" },
+              { playerId: 2,
+                playerName: "elliot" },
+              { playerId: 3,
+                playerName: "michael" },
+            ]
+      };
+
     default:
       return state
   }
