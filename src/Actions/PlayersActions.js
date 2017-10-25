@@ -25,3 +25,9 @@ export function getPlayers() {
     type: "GET_PLAYERS",
   }
 }
+
+export function updatePlayers() {
+  return {
+    type: "UPDATE_PLAYERS",
+  }
+}

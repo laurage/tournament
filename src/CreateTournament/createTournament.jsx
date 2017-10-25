@@ -4,8 +4,8 @@ import { Tile } from '../Common/Tile.styles.jsx';
 import { Button } from '../Common/Button.styles.jsx'
 
 import { connect } from 'react-redux';
-import { getPlayers } from '../Actions/PlayersActions';
-import { addPlayer, removePlayer, inputPlayer } from '../Actions/PlayersActions';
+import { updatePlayers } from '../Actions/PlayersActions';
+import { addPlayer } from '../Actions/PlayersActions';
 
 
 export class CreateTournament extends Component {
@@ -14,25 +14,20 @@ export class CreateTournament extends Component {
     this.shufflePlayers = this.shufflePlayers.bind(this);
   }
 
-  componentWillMount(){
-    console.log("props createTournament1",this.props);
-
-    // this.props.getPlayers();
-  }
-
-  shufflePlayers() {
-    const shuffledPlayers = this.props.players.playersList;
-    for (var i = shuffledPlayers.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = shuffledPlayers[i];
-      shuffledPlayers[i] = shuffledPlayers[j];
-      shuffledPlayers[j] = temp;
-    }
-  }
+// shufflePlayers belongs to the Backend, as this is business logic
+  // shufflePlayers() {
+  //   const shuffledPlayers = this.props.players.playersList;
+  //   for (var i = shuffledPlayers.length - 1; i > 0; i--) {
+  //     var j = Math.floor(Math.random() * (i + 1));
+  //     var temp = shuffledPlayers[i];
+  //     shuffledPlayers[i] = shuffledPlayers[j];
+  //     shuffledPlayers[j] = temp;
+  //   }
+  // }
   render() {
     console.log("props createTournament2",this.props);
     // this.props.addPlayer(4, "emile");
-    // this.props.getPlayers();
+    // this.props.updatePlayers();
     return (
       <Tile styleNextTile>
         <Button onClick={ this.shufflePlayers }>Create</Button>
@@ -47,8 +42,7 @@ const mapStateToProps = state => ({
 
 const mapDispachToProps = {
   addPlayer,
-  getPlayers,
-  // updatePlayers,
+  updatePlayers,
 }
 
 export default connect(
