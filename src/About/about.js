@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { AlignCenterWrapper } from '../Common/AlignCenterWrapper.styles.jsx'
 
 function About () {
   return (
-    <div>
-      Hello this app has been designed by Laura.
-    </div>
+    <AlignCenterWrapper>
+      This app has been designed and developed by Laura Pedroni.
+      It uses React (Create-React-App), and is an exercise to understand good practices and technical decisions made when using React.
+    </AlignCenterWrapper>
   )
 }
 
