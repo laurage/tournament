@@ -4,6 +4,7 @@ import Header from './Header/header.js';
 import Footer from './Footer/footer.js';
 import { Main } from './Common/Main.styles.jsx'
 import GeneratePlayers from './GeneratePlayers/generatePlayers';
+import { About } from './About/about';
 
 import { ThemeProvider } from 'styled-components';
 import { theme } from './assets/theme.js';
@@ -33,6 +34,7 @@ class App extends Component {
               < GeneratePlayers />
             </Main>
             < Footer />
+            < About />
           </div>
         </Provider>
       </ThemeProvider>
