@@ -7,7 +7,7 @@ import { Input } from '../Common/Input.styles.jsx'
 import { AlignCenterWrapper } from '../Common/AlignCenterWrapper.styles.jsx'
 
 import { connect } from 'react-redux';
-import { addPlayer, removePlayer } from '../Actions/PlayersActions';
+import { addPlayer, removePlayer, inputPlayer } from '../Actions/PlayersActions';
 
 class GeneratePlayers extends Component {
   constructor() {
@@ -16,7 +16,8 @@ class GeneratePlayers extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.shufflePlayers = this.shufflePlayers.bind(this);
-    this.state = {input:"", counter: 0};
+    this.state = {
+      counter: 0};
   }
 
   removePlayer(playerId) {
@@ -25,19 +26,17 @@ class GeneratePlayers extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.addPlayer(this.state.counter, this.capitalize(this.state.input));
+    this.props.addPlayer(this.state.counter, this.capitalize(this.props.players.input));
+    this.props.inputPlayer("");
+
     this.setState({
       counter: this.state.counter + 1,
-      input: "",
     })
   }
 
   handleChange(e) {
-    this.setState({
-      input: e.target.value,
-    })
+    this.props.inputPlayer(e.target.value);
   }
-  // inputPlayer(e.target.value)
 
   capitalize(string) {
     const separators = ['-', ' '];
@@ -66,7 +65,7 @@ class GeneratePlayers extends Component {
   }
 
   render() {
-    const players = this.props.players.map((player) =>
+    const players = this.props.players.playersList.map((player) =>
       <li
         key={ player.playerId }>
         < Player name={ player.playerName }
@@ -78,7 +77,7 @@ class GeneratePlayers extends Component {
     return(
       <div>
 
-        < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.state.input } />
+        < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.props.players.input  } />
         <ul>{ players }</ul>
         < Footer shufflePlayers={ this.shufflePlayers }/>
 
@@ -114,7 +113,7 @@ function Player({playerId, removePlayer, name}) {
   return (
     <Tile stylePlayerTile>
       <div> {name} </div>
-      < RemovePlayerBtn playerId={ playerId } removePlayer={removePlayer} />
+      < RemovePlayerBtn playerId={ playerId } removePlayer={ removePlayer } />
     </Tile>
   )
 }
@@ -130,6 +129,7 @@ export const mapStateToProps = state => ({
 export const mapDispachToProps = {
   addPlayer,
   removePlayer,
+  inputPlayer,
 }
 
 export default connect(
