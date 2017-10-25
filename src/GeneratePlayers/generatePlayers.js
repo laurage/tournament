@@ -9,6 +9,8 @@ import { AlignCenterWrapper } from '../Common/AlignCenterWrapper.styles.jsx'
 import { connect } from 'react-redux';
 import { addPlayer, removePlayer, inputPlayer } from '../Actions/PlayersActions';
 
+import { capitalize } from '../helpers';
+
 class GeneratePlayers extends Component {
   constructor() {
     super();
@@ -26,7 +28,7 @@ class GeneratePlayers extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.addPlayer(this.state.counter, this.capitalize(this.props.players.input));
+    this.props.addPlayer(this.state.counter, capitalize(this.props.players.input));
     this.props.inputPlayer("");
 
     this.setState({
@@ -36,18 +38,6 @@ class GeneratePlayers extends Component {
 
   handleChange(e) {
     this.props.inputPlayer(e.target.value);
-  }
-
-  capitalize(string) {
-    const separators = ['-', ' '];
-    let capitalizedString = string.toLowerCase();
-    separators.forEach((separator) => {
-        capitalizedString = capitalizedString.split(separator)
-        .map((string) => string.charAt(0).toUpperCase() + string.slice(1))
-        .join(separator);
-      }
-    )
-    return capitalizedString;
   }
 
   shufflePlayers() {
