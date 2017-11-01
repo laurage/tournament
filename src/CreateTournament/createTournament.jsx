@@ -11,7 +11,7 @@ import { addPlayer } from '../Actions/PlayersActions';
 export class CreateTournament extends Component {
   constructor() {
     super();
-    this.shufflePlayers = this.shufflePlayers.bind(this);
+    // this.shufflePlayers = this.shufflePlayers.bind(this);
   }
 
 // shufflePlayers belongs to the Backend, as this is business logic
@@ -25,7 +25,7 @@ export class CreateTournament extends Component {
   //   }
   // }
   render() {
-    console.log("props createTournament2",this.props);
+    console.log("props createTournament",this.props);
     // this.props.addPlayer(4, "emile");
     // this.props.updatePlayers();
     return (

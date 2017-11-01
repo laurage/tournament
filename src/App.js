@@ -17,8 +17,6 @@ import { Switch, Route } from 'react-router-dom'
 
 class App extends Component {
   render() {
-    console.log("props app", this.state);
-
     return (
       <ThemeProvider theme={theme}>
         <Provider store={store}>
@@ -37,6 +35,5 @@ class App extends Component {
     );
   }
 }
-// < Footer />
 
 export default App;
