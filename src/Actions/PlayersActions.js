@@ -19,3 +19,15 @@ export function inputPlayer(input) {
     input,
   }
 }
+
+export function getPlayers() {
+  return {
+    type: "GET_PLAYERS",
+  }
+}
+
+export function updatePlayers() {
+  return {
+    type: "UPDATE_PLAYERS",
+  }
+}

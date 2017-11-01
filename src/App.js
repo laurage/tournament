@@ -4,6 +4,7 @@ import Header from './Header/header.js';
 import Footer from './Footer/footer.js';
 import { Main } from './Common/Main.styles.jsx'
 import GeneratePlayers from './GeneratePlayers/generatePlayers';
+import CreateTournament from './CreateTournament/createTournament';
 import About from './About/about';
 
 import { ThemeProvider } from 'styled-components';
@@ -15,7 +16,6 @@ import { store } from './store';
 import { Switch, Route } from 'react-router-dom'
 
 class App extends Component {
-
   render() {
     return (
       <ThemeProvider theme={theme}>

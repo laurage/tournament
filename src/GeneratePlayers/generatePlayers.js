@@ -7,7 +7,9 @@ import { Input } from '../Common/Input.styles.jsx'
 import { AlignCenterWrapper } from '../Common/AlignCenterWrapper.styles.jsx'
 
 import { connect } from 'react-redux';
-import { addPlayer, removePlayer, inputPlayer } from '../Actions/PlayersActions';
+import { addPlayer, removePlayer, inputPlayer, getPlayers } from '../Actions/PlayersActions';
+
+import { capitalize } from '../helpers';
 
 class GeneratePlayers extends Component {
   constructor() {
@@ -15,9 +17,12 @@ class GeneratePlayers extends Component {
     this.removePlayer = this.removePlayer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.shufflePlayers = this.shufflePlayers.bind(this);
     this.state = {
       counter: 0};
+  }
+
+  componentWillMount(){
+    this.props.getPlayers();
   }
 
   removePlayer(playerId) {
@@ -26,7 +31,7 @@ class GeneratePlayers extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.addPlayer(this.state.counter, this.capitalize(this.props.players.input));
+    this.props.addPlayer(this.state.counter, capitalize(this.props.players.input));
     this.props.inputPlayer("");
 
     this.setState({
@@ -38,33 +43,9 @@ class GeneratePlayers extends Component {
     this.props.inputPlayer(e.target.value);
   }
 
-  capitalize(string) {
-    const separators = ['-', ' '];
-    let capitalizedString = string.toLowerCase();
-    separators.forEach((separator) => {
-        capitalizedString = capitalizedString.split(separator)
-        .map((string) => string.charAt(0).toUpperCase() + string.slice(1))
-        .join(separator);
-      }
-    )
-    return capitalizedString;
-  }
-
-  shufflePlayers() {
-    const shuffledPlayers = this.state.players;
-    for (var i = shuffledPlayers.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = shuffledPlayers[i];
-      shuffledPlayers[i] = shuffledPlayers[j];
-      shuffledPlayers[j] = temp;
-    }
-
-    this.setState({
-      players: shuffledPlayers,
-    })
-  }
-
   render() {
+    console.log("props generatePlayers",this.props);
+
     const players = this.props.players.playersList.map((player) =>
       <li
         key={ player.playerId }>
@@ -76,11 +57,8 @@ class GeneratePlayers extends Component {
 
     return(
       <div>
-
         < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.props.players.input  } />
         <ul>{ players }</ul>
-        < Footer shufflePlayers={ this.shufflePlayers }/>
-
       </div>
     )
   }
@@ -122,11 +100,12 @@ function RemovePlayerBtn({playerId, removePlayer}) {
   return <button onClick={() => removePlayer(playerId)}>X</button>
 }
 
-export const mapStateToProps = state => ({
+const mapStateToProps = state => ({
   players: state.players,
 })
 
-export const mapDispachToProps = {
+const mapDispachToProps = {
+  getPlayers,
   addPlayer,
   removePlayer,
   inputPlayer,
