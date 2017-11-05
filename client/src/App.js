@@ -15,53 +15,40 @@ import { store } from './store';
 
 import { Switch, Route } from 'react-router-dom'
 
-// class App extends Component {
-//   render() {
-//     return (
-//       <ThemeProvider theme={theme}>
-//         <Provider store={store}>
-//           <div>
-//             < Header />
-//             <Main>
-//               <Switch>
-//                 <Route exact path='/' component={GeneratePlayers}/>
-//                 <Route exact path='/about' component={About}/>
-//               </Switch>
-//             </Main>
-//             < Footer />
-//           </div>
-//         </Provider>
-//       </ThemeProvider>
-//     );
-//   }
-// }
-//
-// export default App;
-
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: ""
-    }
-  }
-
-  componentDidMount() {
-    fetch('/api/hello')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          message: responseJson.message
-        });
-    })
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     message: ""
+  //   }
+  // }
+  //
+  // componentDidMount() {
+  //   fetch('/api/hello')
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       this.setState({
+  //         message: responseJson.message
+  //       });
+  //   })
+  // }
 
   render() {
     return (
-      <div className="App">
-        <h1>message</h1>
-        {this.state.message}
-      </div>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <div>
+            < Header />
+            <Main>
+              <Switch>
+                <Route exact path='/' component={GeneratePlayers}/>
+                <Route exact path='/about' component={About}/>
+              </Switch>
+            </Main>
+            < Footer />
+          </div>
+        </Provider>
+      </ThemeProvider>
     );
   }
 }

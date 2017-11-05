@@ -13,6 +13,10 @@ app.get('/api/hello', function (req, res) {
   res.json({message: "Hello World"});
 });
 
+app.get('/players', function (req, res) {
+  res.json({players: ["Laura", "Anne", "Mark"]});
+});
+
 app.listen(PORT, function () {
   console.log(`Listening on port ${PORT}`);
 });

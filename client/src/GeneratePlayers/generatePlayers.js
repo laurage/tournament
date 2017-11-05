@@ -57,6 +57,8 @@ class GeneratePlayers extends Component {
 
     return(
       <div>
+        <h1>message</h1>
+        <div>{this.props.players}</div>
         < PlayerForm handleChange={ this.handleChange } handleSubmit={ this.handleSubmit } input={ this.props.players.input  } />
         <ul>{ players }</ul>
       </div>

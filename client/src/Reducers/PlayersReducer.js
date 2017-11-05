@@ -28,17 +28,10 @@ export const playerReducer = (state = initialState, action) => {
             input: action.input
       };
 
-    case "GET_PLAYERS":
+    case "SET_PLAYERS":
       return {
             ...state,
-            playersList: [
-              { playerId: 1,
-                playerName: "laura" },
-              { playerId: 2,
-                playerName: "elliot" },
-              { playerId: 3,
-                playerName: "michael" },
-            ]
+            playersList: action.players
       };
       case "UPDATE_PLAYERS":
         return {
