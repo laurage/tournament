@@ -16,23 +16,6 @@ import { store } from './store';
 import { Switch, Route } from 'react-router-dom'
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     message: ""
-  //   }
-  // }
-  //
-  // componentDidMount() {
-  //   fetch('/api/hello')
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-  //       this.setState({
-  //         message: responseJson.message
-  //       });
-  //   })
-  // }
-
   render() {
     return (
       <ThemeProvider theme={theme}>

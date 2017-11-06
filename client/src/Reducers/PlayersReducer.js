@@ -33,18 +33,19 @@ export const playerReducer = (state = initialState, action) => {
             ...state,
             playersList: action.players
       };
-      case "UPDATE_PLAYERS":
-        return {
-              ...state,
-              playersList: [
-                { playerId: 2,
-                  playerName: "elliot" },
-                { playerId: 3,
-                  playerName: "michael" },
-                { playerId: 1,
-                  playerName: "laura" },
-              ]
-        };
+
+    case "UPDATE_PLAYERS":
+      return {
+            ...state,
+            playersList: [
+              { playerId: 2,
+                playerName: "elliot" },
+              { playerId: 3,
+                playerName: "michael" },
+              { playerId: 1,
+                playerName: "laura" },
+            ]
+      };
 
     default:
       return state

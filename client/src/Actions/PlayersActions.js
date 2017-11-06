@@ -1,4 +1,5 @@
 import API from '../api';
+import { store } from '../store';
 
 export function addPlayer(playerId, playerName) {
   return {
@@ -22,24 +23,6 @@ export function inputPlayer(input) {
   }
 }
 
-export const setPlayers = players => ({
-    type: "SET_PLAYERS",
-    players,
-});
-
-// https://github.com/gaearon/redux-thunk/issues/146
-// http://redux.js.org/docs/advanced/AsyncActions.html
-
-export const getPlayers = (update = setPlayers, api = API) => (
-  // dispatch => (
-   api
-    .getPlayers()
-  //     .then((response) => (
-  //       dispatch(update(response.data))
-  //     ))
-  // )
-);
-
 export function updatePlayers() {
   return {
     type: "UPDATE_PLAYERS",
@@ -47,18 +30,23 @@ export function updatePlayers() {
 }
 
 
-//
-// export const setSelectedUserInfo = selectedUser => ({
-//   type: 'SET_SELECTED_USER_INFO',
-//   selectedUser,
-// });
-//
-// export const getUserInfo = (selectedUserId, update = setSelectedUserInfo, api = API) => (
-//   dispatch => (
-//    api
-//     .getSelectedUser(selectedUserId)
-//       .then((response) => (
-//         dispatch(update(response.data))
-//       ))
-//   )
-// );
+export const setPlayers = (players) => {
+  return {
+    type: "SET_PLAYERS",
+    players
+  }
+};
+
+export const getPlayers = (update = setPlayers, api = API) => (
+  dispatch => {
+    api.getPlayers()
+      .then((response) => {
+        dispatch(update(response))
+      })
+  }
+)
+
+
+
+// https://github.com/gaearon/redux-thunk/issues/146
+// http://redux.js.org/docs/advanced/AsyncActions.html
