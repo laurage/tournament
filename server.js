@@ -9,12 +9,8 @@ app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
-app.get('/api/hello', function (req, res) {
-  res.json({message: "Hello World"});
-});
-
 app.get('/players', function (req, res) {
-  res.json({players: ["Laura", "Anne", "Mark"]});
+  res.json({players: [{playerId: 1, playerName: "Laura"}, {playerId: 2, playerName: "Anne"}, {playerId: 3, playerName: "Mark"}]});
 });
 
 app.listen(PORT, function () {
