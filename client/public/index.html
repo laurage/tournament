@@ -39,4 +39,21 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-database.js"></script>
+
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyD2QQfqNUjedllKEXKGjpioipYZCHma4lQ",
+      authDomain: "tournament-9055f.firebaseapp.com",
+      databaseURL: "https://tournament-9055f.firebaseio.com",
+      projectId: "tournament-9055f",
+      storageBucket: "",
+      messagingSenderId: "1004275568808"
+    };
+    firebase.initializeApp(config);
+  </script>
 </html>
