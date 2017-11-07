@@ -44,7 +44,7 @@
   <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-database.js"></script>
 
-  <!-- <script>
+  <script>
     // Initialize Firebase
     var config = {
       apiKey: "AIzaSyD2QQfqNUjedllKEXKGjpioipYZCHma4lQ",
@@ -69,5 +69,12 @@
       "link": "https://www.ted.com/talks/chimamanda_adichie_the_danger_of_a_single_story"
   });
 
-  </script> -->
+
+  var players = firebase.database().ref('players');
+  players.on('value', function(snapshot) {
+    var data = snapshot.val();
+    console.log("data", data);
+  });
+
+  </script>
 </html>
