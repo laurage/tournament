@@ -4,26 +4,21 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-var firebase = require('firebase');
-
-
 // Answer API requests.
 app.get('/', function (req, res) {
   res.send('Hello World!')
 })
 
 app.get('/players', function (req, res) {
-    firebase.database().ref('/').set({
-      username: "test",
-      email: "test@mail.com"
-  });
-
-
-  // res.json({players: [{playerId: 1, playerName: "Laura"}, {playerId: 2, playerName: "Anne"}, {playerId: 3, playerName: "Mark"}]});
+  res.json({players: [{playerId: 1, playerName: "Laura"}, {playerId: 2, playerName: "Anne"}, {playerId: 3, playerName: "Mark"}]});
 });
-
-
 
 app.listen(PORT, function () {
   console.log(`Listening on port ${PORT}`);
 });
+
+// app.get('/players', function (req, res) {
+//   // firebase.database().ref('/').set({
+//   //   username: "test",
+//   //   email: "test@mail.com"
+// });
