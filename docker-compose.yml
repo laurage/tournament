@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  tournament-api:
+    build: ./api
+    ports:
+      - 3001:3001
+    volumes:
+      - "./api:/app"
+    command: node server.js
+  tournament-front:
+   build: ./front
+   ports:
+     - 3000:3000
+   volumes:
+     - "./front:/app"
+   command: npm start
