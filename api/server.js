@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3001;
 
 // Answer API requests.
 app.get('/', function (req, res) {
-  res.send('Hello World!')
+  res.send('Hello World! 4')
 })
 
 app.get('/players', function (req, res) {
