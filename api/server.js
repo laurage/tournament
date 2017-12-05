@@ -4,9 +4,15 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+ });
+
 // Answer API requests.
 app.get('/', function (req, res) {
-  res.send('Hello World! 4')
+  res.send('Hello World! 7')
 })
 
 app.get('/players', function (req, res) {
