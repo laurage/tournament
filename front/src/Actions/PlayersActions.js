@@ -1,7 +1,7 @@
 import API from '../api';
 import { store } from '../store';
 
-export function addPlayer(playerId, playerName) {
+export function addPlayer({playerId, playerName}) {
   return {
     type: "ADD_PLAYER",
     playerId,
@@ -30,19 +30,41 @@ export function updatePlayers() {
 }
 
 
-export const setPlayers = (players) => {
+export const setPlayers = (players, error) => {
   return {
-    type: "SET_PLAYERS",
-    players
+    type: "SET_PLAYERS_SUCCESS",
+    players,
+    error,
   }
 };
 
+// export const getPlay = (thing, update = setPlayers, api = API) => (
+//   dispatch => dispatch({
+//     type: "SET_PLAYERS_SUCCESS",
+//     players: thing,
+//   })
+// )
+//
 export const getPlayers = (update = setPlayers, api = API) => (
+  dispatch => api.getPlayers()
+    .then((response) => {
+      dispatch(update(response))
+    })
+    .catch((error) => {
+      console.log(error)
+      dispatch(update(undefined, true))
+    })
+    // .catch(getPlayers{error: true})
+)
+
+export const setPlayer = (player, update = addPlayer, api = API) => (
   dispatch => {
-    api.getPlayers()
-      .then((response) => {
-        dispatch(update(response))
+    let promise = api.setPlayer(player)
+    promise = promise.then((response) => {
+        const action = update(response)
+        dispatch(action)
       })
+    return promise;
   }
 )
 
