@@ -1,7 +1,16 @@
-const initialState = {
+export const initialState = {
   playersList: [],
   input: "",
   // generatedPlayersCounter: 0, //how to use a counter that increments in the reducer?
+}
+
+const red = (state, action) => {
+  if (action.type === 'ADD_PLAYER') {
+    return {
+      thing: 'added',
+    }
+  }
+  return {thing: 'stuff'}
 }
 
 export const playerReducer = (state = initialState, action) => {
