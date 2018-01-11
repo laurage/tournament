@@ -5,11 +5,14 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.16.2",
-    "nodemon": "^1.12.4",
+    "nodemon": "^1.14.1",
+    "react-scripts": "^1.0.17",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.14.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js "
