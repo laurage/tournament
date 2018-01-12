@@ -30,9 +30,9 @@ export function updatePlayers() {
 }
 
 
-export const setPlayers = (players, error) => {
+export const setPlayers = (players, error = false) => {
   return {
-    type: "SET_PLAYERS_SUCCESS",
+    type: "SET_PLAYERS",
     players,
     error,
   }
@@ -52,7 +52,7 @@ export const getPlayers = (update = setPlayers, api = API) => (
     })
     .catch((error) => {
       console.log(error)
-      dispatch(update(undefined, true))
+      dispatch(update(undefined, error))
     })
     // .catch(getPlayers{error: true})
 )

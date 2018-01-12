@@ -17,6 +17,10 @@ const api = {
     return Promise.resolve({playerId: 1, playerName: player.playerName})
   }
 }
+
+
+
+//////////////////////////////////
 // it('...', () => {
 //  const thunk = PlayersActions.getPlayers(undefined, api)
 //  return thunk(dispatch)

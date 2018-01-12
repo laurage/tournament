@@ -40,7 +40,8 @@ export const playerReducer = (state = initialState, action) => {
     case "SET_PLAYERS":
       return {
             ...state,
-            playersList: action.players
+            playersList: action.players,
+            error: action.error,
       };
 
     case "UPDATE_PLAYERS":
