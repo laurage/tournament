@@ -12,7 +12,7 @@ app.use('/', function(req, res, next) {
 
 // Answer API requests.
 app.get('/', function (req, res) {
-  res.send('Hello World! 9')
+  res.send('Hello World! 11')
 })
 
 app.get('/players', function (req, res) {
