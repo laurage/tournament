@@ -4,35 +4,22 @@ services:
 
   tournament-api:
 
-    container_name: api
+    container_name: tournament-api
     build: .
     ports:
       - 3001:3000
     volumes:
       - "./api:/app"
-      - "/app/node_modules"
-    links:
-      - "tournament-db"
     command: npm start
 
   tournament-front:
 
-    container_name: web
+    container_name: tournament-web
     build: .
     ports:
      - 3000:3000
     volumes:
      - "./front:/app"
-     - "/app/node_modules"
     command: npm start
     environment:
      - REACT_APP_API_HOST=${REACT_APP_API_HOST}
-
-  tournament-db:
-
-    container_name: db
-    image: mysql
-    ports:
-      - 3306:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}

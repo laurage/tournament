@@ -12,11 +12,11 @@ app.use('/', function(req, res, next) {
 
 // Answer API requests.
 app.get('/', function (req, res) {
-  res.send('Hello World! 7')
+  res.send('Hello World! 11')
 })
 
 app.get('/players', function (req, res) {
-  res.json({players: [{playerId: 1, playerName: "Laura"}, {playerId: 2, playerName: "Anne"}, {playerId: 3, playerName: "Mark"}]});
+  res.json({players: [{playerId: 1, playerName: "Loz"}, {playerId: 2, playerName: "Anne"}, {playerId: 3, playerName: "Mark"}]});
 });
 
 app.listen(PORT, function () {
