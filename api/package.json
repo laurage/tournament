@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "assert": "^1.4.1",
+    "consolidate": "^0.15.0",
     "express": "^4.16.2",
+    "mongodb": "^3.0.1",
     "nodemon": "^1.14.1",
     "react-scripts": "^1.0.17",
     "redux-logger": "^3.0.6",
