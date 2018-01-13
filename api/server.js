@@ -19,6 +19,10 @@ app.get('/players', function (req, res) {
   res.json({players: [{playerId: 1, playerName: "Loz"}, {playerId: 2, playerName: "Anne"}, {playerId: 3, playerName: "Mark"}]});
 });
 
+app.use( function (req, res) {
+  res.sendStatus(404);
+});
+
 app.listen(PORT, function () {
   console.log(`Listening on port ${PORT}`);
 });

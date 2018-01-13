@@ -29,21 +29,23 @@ export function updatePlayers() {
   }
 }
 
-
-export const setPlayers = (players) => {
+export const setPlayers = (players, error = false) => {
   return {
     type: "SET_PLAYERS",
-    players
+    players,
+    error,
   }
 };
 
 export const getPlayers = (update = setPlayers, api = API) => (
-  dispatch => {
-    api.getPlayers()
-      .then((response) => {
-        dispatch(update(response))
-      })
-  }
+  dispatch => api.getPlayers()
+    .then((response) => {
+      dispatch(update(response))
+    })
+    .catch((error) => {
+      console.log(error)
+      dispatch(update(undefined, error))
+    })
 )
 
 
